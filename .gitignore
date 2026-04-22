@@ -1,0 +1,20 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Ansible
+*.retry
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Python cache
+__pycache__/
