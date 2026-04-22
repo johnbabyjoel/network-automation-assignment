@@ -1,0 +1,39 @@
+- name: Setup server and deploy Docker app
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Start and enable Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Stop old container if running
+      shell: docker stop myapp-container || true
+
+    - name: Remove old container if present
+      shell: docker rm myapp-container || true
+
+    - name: Remove old image if present
+      shell: docker rmi myapp || true
+
+    - name: Copy app folder to server
+      copy:
+        src: ../app/
+        dest: /home/ubuntu/app/
+
+    - name: Build Docker image
+      command: docker build -t myapp /home/ubuntu/app
+
+    - name: Run Docker container
+      command: docker run -d --name myapp-container -p 80:80 myapp
