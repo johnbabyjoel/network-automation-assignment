@@ -1,20 +1,21 @@
 # Terraform
-.terraform/
-*.tfstate
-*.tfstate.*
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.*
+terraform/terraform.tfstate
+terraform/terraform.tfstate.*
 crash.log
 
-# Sensitive variable files
+# Secrets / keys
+*.pem
 *.tfvars
 *.tfvars.json
 
-# Ansible
-*.retry
-
-# OS / editor files
+# Editor / OS
+.vscode/
 .DS_Store
 Thumbs.db
-.vscode/
 
-# Python cache
-__pycache__/
+# Ansible
+*.retry
